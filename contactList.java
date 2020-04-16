@@ -9,35 +9,26 @@ public class contactList {
     Scanner Scanner = new Scanner(System.in);
 
     //    Thêm danh bạ:
-    public void addContact() {
-        System.out.println("Moi nhap ten moi:\n");
-        String addName = Scanner.next();
-        System.out.println("Moi nhap so dien thoai moi:\t");
-        String addPhone = Scanner.next();
-        myContact.add(new contact(addName, addPhone));
+    public ArrayList<contact> addContact(contact contact) {
+        myContact.add(contact);
+        return myContact;
     }
 
     //    Sua danh ba:
-    public void updateContact() {
-        System.out.println("Nhap vi tri ma ban muon sua:\t(0-n)\n");
-        int num = Scanner.nextInt();
-        System.out.println("Nhap ten ban muon sua thanh:\n");
-        String newName = Scanner.next();
-        System.out.println("nhap so ma ban muon sua thanh:\n");
-        String newPhone = Scanner.next();
-        myContact.set(num, new contact(newName, newPhone));
+    public ArrayList<contact> updateContact(contact lastName, contact firstname) {
+        for (int i = 0; i < myContact.size(); i++) {
+            if (lastName.equals(myContact.get(i))) {
+                myContact.set(i, firstname);
+            }
+        }
+        return myContact;
     }
 
     //Seach:
-    public void searchContact() {
-        System.out.println("Nhap ten ban muon tim:\n");
-        String searName = Scanner.next();
+    public void searchContact(String searName) {
         for (int i = 0; i < myContact.size(); i++) {
-            if(searName.equals(myContact.get(i).getName())) {
+            if (searName.equals(myContact.get(i).getName())) {
                 System.out.println(myContact.get(i));
-            }
-            else {
-                System.out.println("Sai roi, danh sach cua ban:\n" + i + ":" + myContact.get(i));
             }
         }
     }
@@ -48,14 +39,12 @@ public class contactList {
     }
 
     //    remove
-    public void removeContact() {
-        contact ctnRemove = new contact("Duc", "0977");
+    public ArrayList<contact> removeContact(contact contact) {
         for (int i = 0; i < myContact.size(); i++) {
-            if (ctnRemove.getName().equals(myContact.get(i).getName()))
-                System.out.println("ok");
-            else {
-                System.out.println("Sai roi, danh sach cua ban:\n" + i + ":"  + myContact.get(i));
+            if (contact.getName().equals(myContact.get(i).getName())) {
+                myContact.remove(i);
             }
         }
+        return myContact;
     }
 }
